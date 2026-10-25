@@ -1,0 +1,10 @@
+export type Language='en'|'hi'|'mr';
+export type AlertStatus='Queued'|'Sending'|'Attempted'|'Sent'|'Delivered'|'Acknowledged'|'Failed';
+export type Contact={id:string;name:string;value:string;method:'phone'|'email';preferences:string[];verification:'unverified'|'verified'};
+export type AlertRecord={id:string;time:number;kind:'SOS'|'SIMULATED';status:AlertStatus;network:string;demo?:boolean;note?:string;location?:{latitude:number;longitude:number;accuracy?:number}};
+export type Journey={id:string;destination:string;arrival:number;interval:number;grace:number;nextCheck:number;stage:'monitoring'|'grace'|'escalation_attempted';graceUntil?:number;};
+export type Incident={id:string;title:string;category:string;description:string;sender?:string;risk:'Low'|'Medium'|'High';time:number;files?:{id:string;name:string;size:number;sha256:string;mime:string}[]};
+export type LocalReport={id:string;category:string;severity:string;description:string;latitude:number;longitude:number;time:number;status:string};
+export type SupportVolunteer={id:string;name:string;contact:string;verification:'unverified'|'verified'|'demo';optedIn:boolean;createdAt:number};
+export type AppState={contacts:Contact[];alerts:AlertRecord[];journey:Journey|null;incidents:Incident[];reports:LocalReport[];language:Language;grace:number;demoLog:string[];shareUntil:number|null;privacyLock:boolean;reportTracker:string;privacyCheckup:Record<string,boolean>;accountSecurityCheckup:Record<string,boolean>;trackerSafetyCheckup:Record<string,boolean>;supportVolunteers:SupportVolunteer[]};
+export const initialState:AppState={contacts:[],alerts:[],journey:null,incidents:[],reports:[],language:'en',grace:2,demoLog:[],shareUntil:null,privacyLock:false,reportTracker:'Not started',privacyCheckup:{},accountSecurityCheckup:{},trackerSafetyCheckup:{},supportVolunteers:[]};
